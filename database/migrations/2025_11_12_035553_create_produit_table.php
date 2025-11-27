@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('categorie', 100)->nullable();
             $table->dateTime('date_ajout')->nullable()->useCurrent();
             $table->integer('id_admin')->nullable()->index('id_admin');
+            
         });
     }
 
