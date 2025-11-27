@@ -16,8 +16,7 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        return view('admin.produits.create');
-    }
+return view('admin.produit-create');    }
 
     public function store(Request $request)
     {
@@ -94,7 +93,9 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        $produits = Produit::with('admin')->latest()->get();
+        $produits = Produit::orderBy('id_produit', 'desc')->paginate(10);
+        // $produits = Produit::with('admin')->latest()->get();
         return view('admin.gestion-produits', compact('produits'));
     }
+    
 }

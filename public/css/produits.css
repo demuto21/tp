@@ -344,17 +344,31 @@ select,
 textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #e5e7eb;
+    /* Rendre la bordure plus claire par défaut */
+    border: 1px solid #d1d5db; 
     border-radius: 0.5rem;
     font-family: inherit;
+    color: #1e3a8a;
+    background-color: #ffffff; /* Fond blanc propre */
+    transition: all 0.3s ease; /* Ajouter une transition douce pour le focus/hover */
+    font-size: 1rem;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6; /* Bordure bleue primaire */
+    /* Anneau de focus plus visible mais subtil */
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); 
+    background-color: #f9fafb; /* Léger fond sur focus */
+}
+
+/* État de survol (Hover) */
+input:hover:not(:focus),
+select:hover:not(:focus),
+textarea:hover:not(:focus) {
+    border-color: #93c5fd; /* Bordure légèrement plus foncée au survol */
 }
 
 textarea {
@@ -486,4 +500,152 @@ textarea {
     .actions-cell {
         flex-direction: column;
     }
+    /* ================================================================= */
+/* 1. STYLES SPÉCIFIQUES POUR LE FORMULAIRE (pour le rendre plus beau) */
+/* Utilise .form-container pour augmenter la spécificité */
+/* ================================================================= */
+
+.form-container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    margin-top: 2rem;
+    display: block; /* S'assurer qu'il est visible */
+}
+
+/* --- Grille et Layout (Correspondant à form-grid et full-width) --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
+    gap: 25px 30px; /* Espace entre les champs */
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1; /* Prend toute la largeur, de la première à la dernière colonne */
+}
+
+/* --- Labels et Texte d'Aide --- */
+.form-container label {
+    display: block;
+    font-weight: 700; 
+    margin-bottom: 0.4rem; 
+    color: #1e3a8a; /* Bleu foncé pour les labels */
+    font-size: 0.95rem; 
+}
+
+.form-container .text-danger {
+    color: #ef4444; /* Rouge pour les erreurs */
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* --- Champs de Saisie (Inputs, Selects, Textareas) --- */
+.form-container input:not([type="checkbox"]):not([type="radio"]),
+.form-container select,
+.form-container textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db; 
+    border-radius: 0.5rem;
+    font-family: inherit;
+    color: #1f2937; /* Texte gris foncé */
+    background-color: #ffffff;
+    transition: all 0.3s ease; 
+    font-size: 1rem;
+}
+
+/* État de focus (visuel professionnel) */
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+    outline: none;
+    border-color: #3b82f6; /* Bordure bleue primaire */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Anneau de focus */
+    background-color: #f9fafb;
+}
+
+/* État de survol */
+.form-container input:hover:not(:focus),
+.form-container select:hover:not(:focus),
+.form-container textarea:hover:not(:focus) {
+    border-color: #93c5fd; 
+}
+
+.form-container textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* --- Section Actions du Formulaire --- */
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb; 
+}
+
+/* --- Styles des Boutons Spécifiques au Formulaire --- */
+.btn-primary {
+    /* Assurez-vous que vos styles de bouton principaux sont bien définis ici ou dans admin.css */
+    /* Exemple: */
+    background-color: #1e3a8a;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary-outline {
+    background-color: transparent;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+.btn-secondary-outline:hover {
+    background-color: #f3f4f6;
+    color: #1e3a8a;
+    border-color: #a1a1aa;
+}
+
+
+/* ================================================================= */
+/* 2. Responsive (Pour les petits écrans) */
+/* ================================================================= */
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+    /* Les champs full-width ne nécessitent plus de traitement spécial ici */
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .form-actions .btn {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
 }

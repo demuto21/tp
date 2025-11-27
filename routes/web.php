@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminClient;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 // Routes publiques
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
@@ -39,4 +40,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::patch('/commandes/{id}/statut', [AdminOrderController::class, 'updateStatus'])->name('commandes.updateStatus');
 
     Route::get('/clients', [AdminClient::class, 'index'])->name('clients.index');
+
+    Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profil', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin'], function () {
+    
+    Route::resource('produits', AdminProductController::class); 
+Route::get('produits/create', [AdminProductController::class, 'create'])->name('produits.create');
+});
 });

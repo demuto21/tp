@@ -61,3 +61,497 @@
 .dropdown-item:hover {
     background: #f8f9fa;
 }
+/* === Style du Nom Cliquable === */
+.admin-name-link {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.admin-name-link:hover {
+    color: #d4af37; /* Couleur Dorée au survol */
+    text-decoration: underline;
+}
+
+/* === Conteneur des boutons === */
+.admin-actions-buttons {
+    display: flex;
+    gap: 10px; /* Espace entre les boutons */
+    margin-top: 8px;
+}
+
+.logout-form-inline {
+    margin: 0;
+    padding: 0;
+}
+
+/* === Style général des petits boutons === */
+.btn-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem; /* Petite taille pour ne pas casser le header */
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    border: 1px solid transparent;
+}
+
+/* === Bouton Profil (Marron/Doré) === */
+.btn-mini-profile {
+    background-color: transparent;
+    border: 1px solid #8B4513; /* Bordure Marron */
+    color: #8B4513;
+}
+
+.btn-mini-profile:hover {
+    background-color: #8B4513; /* Fond Marron au survol */
+    color: #fff; /* Texte Blanc */
+}
+
+/* === Bouton Déconnexion (Rouge léger ou Gris foncé) === */
+.btn-mini-logout {
+    background-color: transparent;
+    border: 1px solid #dc3545; /* Bordure Rouge pour distinction */
+    color: #dc3545;
+}
+
+.btn-mini-logout:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+/* =========================================
+   NAVBAR & LAYOUT (Style Global Admin)
+   Couleurs: Bleu (#3b82f6), Foncé (#1e3a8a)
+   ========================================= */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Header / Navbar --- */
+.admin-header {
+    background-color: #f0f4ff; /* Fond bleu très clair */
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo & Badge */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.admin-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border-radius: 0.375rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Actions Droite */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Bouton "Voir le site" */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* --- Zone Info Admin (Avatar + Nom + Boutons) --- */
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent; /* Fond blanc pour détacher du header */
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    background: #3b82f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.admin-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.admin-name-link {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+.admin-name-link:hover {
+    text-decoration: underline;
+    color: #3b82f6;
+}
+
+.admin-email {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+/* --- Petits boutons Profil / Déconnexion --- */
+.admin-actions-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.btn-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-family: inherit;
+    background: transparent;
+}
+
+/* Bouton Profil (Bleu) */
+.btn-mini-profile {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.btn-mini-profile:hover {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* Bouton Déconnexion (Rouge) */
+.btn-mini-logout {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.btn-mini-logout:hover {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+/* =========================================
+   PAGE PROFIL (Admin)
+   Thème: AllSports Blue (Aligné avec tableau de bord)
+   ========================================= */
+
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+/* --- En-tête Profil --- */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #3b82f6; /* Bleu AllSports */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #3b82f6; /* Bleu primaire */
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid #e0e7ff; /* Bleu très pâle pour le contour */
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #1e3a8a; /* Bleu foncé (Textes titres) */
+}
+
+.badge-admin {
+    background-color: rgba(59, 130, 246, 0.1); /* Fond bleu léger */
+    color: #3b82f6; /* Texte bleu */
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* --- Carte Formulaire --- */
+.profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1e3a8a; /* Bleu foncé */
+    border-bottom: 2px solid #f0f4ff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.section-header i { font-size: 1.2rem; color: #3b82f6; }
+.section-header h3 { margin: 0; font-size: 1.3rem; }
+
+/* --- Grille et Inputs --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group { margin-bottom: 20px; }
+.full-width { grid-column: span 2; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4b5563; /* Gris texte standard */
+}
+
+.required { color: #ef4444; }
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af; /* Gris icône inactif */
+    transition: color 0.3s;
+}
+
+.input-icon:focus-within i {
+    color: #3b82f6; /* L'icône devient bleue au focus */
+}
+
+.textarea-icon i { top: 20px; }
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #1f2937;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); /* Halo bleu AllSports */
+    outline: none;
+}
+
+/* --- Divers --- */
+.divider {
+    height: 1px;
+    background: #f0f4ff;
+    margin: 30px 0;
+}
+
+.text-muted {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.text-error {
+    color: #dc2626; /* Rouge erreur */
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+/* --- Bouton Sauvegarder (Aligné sur btn-primary du site) --- */
+.form-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-save {
+    background-color: #3b82f6; /* Bleu principal */
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1rem;
+    border-radius: 8px; /* Même radius que vos autres boutons */
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.btn-save:hover {
+    background-color: #2563eb; /* Bleu plus foncé au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .profile-header { flex-direction: column; text-align: center; }
+    .profile-header { border-left: none; border-top: 5px solid #3b82f6; }
+}
+/* Style pour le conteneur du formulaire */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Grille pour les champs en deux colonnes */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px; /* Espace vertical et horizontal */
+}
+
+/* Les champs qui doivent prendre toute la largeur */
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+/* Style des boutons du formulaire */
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Boutons secondaires (Annuler) */
+.btn-secondary-outline {
+    background-color: transparent;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary-outline:hover {
+    background-color: #f3f4f6;
+    color: #1e3a8a;
+}
+
+/* Adaptez les autres classes .form-group et .btn-primary déjà définies. */
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+}

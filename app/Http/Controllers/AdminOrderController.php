@@ -14,10 +14,12 @@ class AdminOrderController extends Controller
      */
     public function index()
     {
-        $commandes = Commande::with(['client', 'panier.produits'])
-            ->latest()
-            ->get();
 
+        
+        // $commandes = Commande::with(['client', 'panier.produits'])
+        //     ->latest()
+        //     ->get();
+$commandes = Commande::orderBy('id_commande', 'desc')->paginate(10);
         return view('admin.admin-commandes', compact('commandes'));
     }
 

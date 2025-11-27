@@ -1,9 +1,13 @@
-
-        const ordersKey = 'allsports_orders';
+const ordersKey = 'allsports_orders';
         let currentStatusFilter = 'all';
 
         function getOrders() {
             const data = localStorage.getItem(ordersKey);
+            
+            // Correction des statuts dans les données simulées pour correspondre à la vue Blade
+            // en_cours -> payée / expédiée
+            // livree -> livrée
+            // annulee -> annulée
             return data ? JSON.parse(data) : [
                 { 
                     id: 'CMD001', 
@@ -11,7 +15,7 @@
                     email: 'jean.dupont@yahoo.cm',
                     date: '2025-11-03', 
                     montant: 85000, 
-                    statut: 'en_attente', 
+                    statut: 'en_attente', // CONSERVÉ
                     produits: [
                         { nom: 'Chaussures de Running Pro', prix: 45000, quantite: 1 },
                         { nom: 'T-Shirt Performance', prix: 15000, quantite: 2 }
@@ -25,7 +29,7 @@
                     email: 'marie.sarr@gmail.com',
                     date: '2025-11-02', 
                     montant: 45000, 
-                    statut: 'en_cours', 
+                    statut: 'payée', // CORRIGÉ : en_cours -> payée
                     produits: [
                         { nom: 'Legging Sport Élégant', prix: 25000, quantite: 1 },
                         { nom: 'Tapis de Yoga Premium', prix: 20000, quantite: 1 }
@@ -39,7 +43,7 @@
                     email: 'paul.ndiaye@yahoo.cm',
                     date: '2025-11-01', 
                     montant: 120000, 
-                    statut: 'livree', 
+                    statut: 'livrée', // CORRIGÉ : livree -> livrée
                     produits: [
                         { nom: 'Vélo de Course', prix: 90000, quantite: 1 },
                         { nom: 'Casque de Sécurité', prix: 15000, quantite: 1 },
@@ -54,7 +58,7 @@
                     email: 'sophie.ndiaye@gmail.com',
                     date: '2025-11-03', 
                     montant: 75000, 
-                    statut: 'en_attente', 
+                    statut: 'en_attente', // CONSERVÉ
                     produits: [
                         { nom: 'Sac de Sport Grande Capacité', prix: 18000, quantite: 1 },
                         { nom: 'Chaussures de Running Pro', prix: 45000, quantite: 1 },
@@ -69,7 +73,7 @@
                     email: 'alioune.fall@outlook.cm',
                     date: '2025-11-02', 
                     montant: 35000, 
-                    statut: 'annulee', 
+                    statut: 'annulée', // CORRIGÉ : annulee -> annulée
                     produits: [
                         { nom: 'Veste Sport Imperméable', prix: 35000, quantite: 1 }
                     ],
@@ -82,7 +86,7 @@
                     email: 'fatou.mbappe@hotmail.cm',
                     date: '2025-11-04', 
                     montant: 68000, 
-                    statut: 'en_cours', 
+                    statut: 'expédiée', // CORRIGÉ : en_cours -> expédiée
                     produits: [
                         { nom: 'Ballon de Football Professionnel', prix: 25000, quantite: 1 },
                         { nom: 'Protèges Tibias', prix: 15000, quantite: 1 },
@@ -97,7 +101,7 @@
                     email: 'pierre.tchouameni@gmail.com',
                     date: '2025-11-03', 
                     montant: 95000, 
-                    statut: 'livree', 
+                    statut: 'livrée', // CORRIGÉ : livree -> livrée
                     produits: [
                         { nom: 'Raquette de Tennis Pro', prix: 65000, quantite: 1 },
                         { nom: 'Balles de Tennis (pack de 4)', prix: 15000, quantite: 2 }
@@ -111,7 +115,7 @@
                     email: 'aicha.kone@yahoo.cm',
                     date: '2025-11-05', 
                     montant: 42000, 
-                    statut: 'en_attente', 
+                    statut: 'en_attente', // CONSERVÉ
                     produits: [
                         { nom: 'Short de Sport Respirant', prix: 12000, quantite: 1 },
                         { nom: 'Brassière de Sport', prix: 15000, quantite: 1 },
@@ -126,7 +130,7 @@
                     email: 'm.aboubakar@gmail.com',
                     date: '2025-11-04', 
                     montant: 110000, 
-                    statut: 'en_cours', 
+                    statut: 'payée', // CORRIGÉ : en_cours -> payée
                     produits: [
                         { nom: 'Tapis de Course Électrique', prix: 85000, quantite: 1 },
                         { nom: 'Haltères Adjustables', prix: 25000, quantite: 1 }
@@ -140,7 +144,7 @@
                     email: 'claire.etoo@outlook.cm',
                     date: '2025-11-02', 
                     montant: 28000, 
-                    statut: 'annulee', 
+                    statut: 'annulée', // CORRIGÉ : annulee -> annulée
                     produits: [
                         { nom: 'Corde à Sauter Professionnelle', prix: 8000, quantite: 1 },
                         { nom: 'Gourde Isotherme', prix: 10000, quantite: 2 }
@@ -154,7 +158,7 @@
                     email: 'd.mvogo@yahoo.cm',
                     date: '2025-11-05', 
                     montant: 135000, 
-                    statut: 'en_attente', 
+                    statut: 'en_attente', // CONSERVÉ
                     produits: [
                         { nom: 'Tapis de Gym Premium', prix: 35000, quantite: 1 },
                         { nom: 'Kit d\'haltères 20kg', prix: 45000, quantite: 1 },
@@ -169,7 +173,7 @@
                     email: 'sarah.ngalle@gmail.com',
                     date: '2025-11-01', 
                     montant: 52000, 
-                    statut: 'livree', 
+                    statut: 'livrée', // CORRIGÉ : livree -> livrée
                     produits: [
                         { nom: 'Ballon de Basketball', prix: 18000, quantite: 1 },
                         { nom: 'Maillot de Sport', prix: 12000, quantite: 2 },
@@ -195,23 +199,28 @@
             
             // Appliquer les filtres
             if (currentStatusFilter !== 'all') {
+                // Le filtre utilise le statut corrigé (ex: 'livrée')
                 filteredOrders = filteredOrders.filter(o => o.statut === currentStatusFilter);
             }
             
             const tbody = document.getElementById('ordersTable');
             tbody.innerHTML = filteredOrders.map(order => `
-                <tr>
+                <tr data-status="${order.statut}">
                     <td><strong>${order.id}</strong></td>
                     <td>${order.client}</td>
                     <td>${order.email}</td>
                     <td>${formatDate(order.date)}</td>
                     <td><strong>${order.montant.toLocaleString('fr-FR')} FCFA</strong></td>
-                    <td><span class="status-badge status-${order.statut}">${order.statut.replace('_', ' ')}</span></td>
+                    <td>
+                        <span class="status-badge status-${order.statut}">
+                            ${order.statut.replace('_', ' ')}
+                        </span>
+                    </td>
                     <td class="actions-cell">
                         <button class="btn btn-secondary btn-sm" onclick="viewOrder('${order.id}')">
                             <i class="fas fa-eye"></i> Voir
                         </button>
-                        ${order.statut !== 'livree' && order.statut !== 'annulee' ? 
+                        ${order.statut !== 'livrée' && order.statut !== 'annulée' ? // Statuts corrigés ici aussi
                             `<button class="btn btn-sm" onclick="nextStatus('${order.id}')">
                                 <i class="fas fa-arrow-right"></i> Suivant
                             </button>` : ''}
@@ -219,20 +228,40 @@
                 </tr>
             `).join('');
             
-            // Mettre à jour le compteur de commandes
-            document.getElementById('orderCount').textContent = `${filteredOrders.length} commande(s) trouvée(s)`;
+            // CORRECTION: Mettre à jour le texte du conteneur .order-count, pas un élément avec ID 'orderCount'
+            const orderCountElement = document.querySelector('.order-count');
+            if (orderCountElement) {
+                orderCountElement.textContent = `Total : ${filteredOrders.length} commande(s)`;
+            }
         }
 
         function filterByStatus(status) {
             currentStatusFilter = status;
+            
+            // CORRECTION: Inclure tous les statuts de la vue Blade
             const statusTexts = {
                 'all': 'Tous les statuts',
                 'en_attente': 'En attente',
-                'en_cours': 'En cours',
-                'livree': 'Livrée',
-                'annulee': 'Annulée'
+                'payée': 'Payée', // AJOUTÉ
+                'expédiée': 'Expédiée', // AJOUTÉ
+                'livrée': 'Livrée', // CORRIGÉ
+                'annulée': 'Annulée' // CORRIGÉ
             };
+            
             document.getElementById('statusText').textContent = statusTexts[status];
+            
+            // Optionnel: Mettre à jour l'URL comme dans une vraie application Laravel (même si la simulation reste JS)
+            const url = new URL(window.location.href);
+            const params = url.searchParams;
+
+            if (status === 'all') {
+                params.delete('status');
+            } else {
+                params.set('status', status);
+            }
+            // Mettre à jour l'historique sans recharger
+            window.history.pushState({}, '', url.pathname + '?' + params.toString());
+            
             closeAllDropdowns();
             displayOrders(getOrders());
         }
@@ -259,7 +288,7 @@
 
         // Fermer les dropdowns en cliquant ailleurs
         document.addEventListener('click', function(event) {
-            if (!event.target.matches('.dropdown-btn')) {
+            if (!event.target.matches('.dropdown-btn') && !event.target.closest('.dropdown-btn')) {
                 closeAllDropdowns();
             }
         });
@@ -271,6 +300,8 @@
 
         function viewOrder(id) {
             const order = getOrders().find(o => o.id === id);
+            
+            // Correction des statuts dans le sélecteur du modal
             document.getElementById('modalBody').innerHTML = `
                 <div class="order-details">
                     <p><strong>ID Commande :</strong> ${order.id}</p>
@@ -304,9 +335,10 @@
                     <label for="statusSelect">Changer le statut :</label>
                     <select id="statusSelect" onchange="updateOrderStatus('${order.id}')">
                         <option value="en_attente" ${order.statut === 'en_attente' ? 'selected' : ''}>En attente</option>
-                        <option value="en_cours" ${order.statut === 'en_cours' ? 'selected' : ''}>En cours</option>
-                        <option value="livree" ${order.statut === 'livree' ? 'selected' : ''}>Livrée</option>
-                        <option value="annulee" ${order.statut === 'annulee' ? 'selected' : ''}>Annulée</option>
+                        <option value="payée" ${order.statut === 'payée' ? 'selected' : ''}>Payée</option> 
+                        <option value="expédiée" ${order.statut === 'expédiée' ? 'selected' : ''}>Expédiée</option> 
+                        <option value="livrée" ${order.statut === 'livrée' ? 'selected' : ''}>Livrée</option> 
+                        <option value="annulée" ${order.statut === 'annulée' ? 'selected' : ''}>Annulée</option>
                     </select>
                 </div>
             `;
@@ -325,11 +357,13 @@
                 const currentStatus = orders[orderIndex].statut;
                 let newStatus;
                 
-                // Définir le statut suivant selon la progression logique
+                // CORRECTION: Définir le statut suivant selon la progression standard
                 if (currentStatus === 'en_attente') {
-                    newStatus = 'en_cours';
-                } else if (currentStatus === 'en_cours') {
-                    newStatus = 'livree';
+                    newStatus = 'payée'; // Nouveau: En attente -> Payée
+                } else if (currentStatus === 'payée') {
+                    newStatus = 'expédiée'; // Nouveau: Payée -> Expédiée
+                } else if (currentStatus === 'expédiée') {
+                    newStatus = 'livrée'; // Nouveau: Expédiée -> Livrée
                 } else {
                     return; // Ne rien faire si déjà livrée ou annulée
                 }
@@ -362,11 +396,13 @@
         }
 
         function notifyCustomer(order, newStatus) {
+            // CORRECTION: Mise à jour des messages
             const statusMessages = {
-                'en_attente': 'est en attente de traitement',
-                'en_cours': 'est en cours de préparation',
-                'livree': 'a été livrée',
-                'annulee': 'a été annulée'
+                'en_attente': 'est en attente de paiement et traitement',
+                'payée': 'a été payée et est en cours de préparation',
+                'expédiée': 'a été expédiée et est en cours de livraison',
+                'livrée': 'a été livrée',
+                'annulée': 'a été annulée'
             };
             
             console.log(`Notification envoyée à ${order.client} (${order.email}) :`);
@@ -378,11 +414,41 @@
 
         function showAlert(message, type) {
             const alert = document.getElementById('alert');
-            alert.textContent = message;
-            alert.className = `alert alert-${type} show`;
-            setTimeout(() => alert.classList.remove('show'), 4000);
+            // Assurez-vous d'avoir un élément <div id="alert"></div> dans votre layout admin
+            if (alert) {
+                 alert.textContent = message;
+                 alert.className = `alert alert-${type} show`;
+                 setTimeout(() => alert.classList.remove('show'), 4000);
+            } else {
+                console.warn("L'élément d'alerte (id='alert') est manquant dans le DOM.");
+            }
         }
 
+        // CORRECTION: Récupérer le filtre depuis l'URL au chargement de la page (pour la simulation)
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get('status') || 'all';
+            currentStatusFilter = status;
+
+            // Mise à jour du texte du bouton au chargement
+            const statusTexts = {
+                'all': 'Tous les statuts',
+                'en_attente': 'En attente',
+                'payée': 'Payée',
+                'expédiée': 'Expédiée',
+                'livrée': 'Livrée',
+                'annulée': 'Annulée'
+            };
+            const statusTextElement = document.getElementById('statusText');
+            if (statusTextElement && statusTexts[status]) {
+                 statusTextElement.textContent = statusTexts[status];
+            }
+            
+            // Initialiser l'affichage
+            displayOrders(getOrders());
+        });
+        
+        // La fonction checkAuth et logout restent inchangées
         function checkAuth() {
             if (!document.cookie.includes('admin_session')) {
                 window.location.href = 'admin-login.html';
@@ -401,6 +467,3 @@
             const modal = document.getElementById('orderModal');
             if (e.target === modal) closeModal();
         });
-
-        // Initialiser l'affichage
-        displayOrders(getOrders());

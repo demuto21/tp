@@ -1,96 +1,78 @@
+/**
+ * Fonction générique pour appliquer la recherche et les filtres côté client sur une table.
+ * * @param {string} tableId - L'ID de la table (ex: 'produits-table').
+ * @param {string} searchInputId - L'ID du champ de recherche (ex: 'searchInput').
+ * @param {Array<string>} filterSelectIds - Tableau des ID de tous les sélecteurs de filtre (ex: ['statusFilter', 'categoryFilter']).
+ */
+function applyTableFilter(tableId, searchInputId, filterSelectIds = []) {
+    const searchInput = document.getElementById(searchInputId);
+    const tableBody = document.querySelector(`#${tableId} tbody`);
+    if (!searchInput || !tableBody) {
+        // console.error(`Table ou champ de recherche manquant pour l'ID: ${tableId}`);
+        return; 
+    }
 
-        // === Gestion des données via cookies/localStorage ===
-        const statsKey = 'allsports_stats';
-        const ordersKey = 'allsports_orders';
-        const productsKey = 'allsports_products';
+    const filters = filterSelectIds.map(id => document.getElementById(id)).filter(el => el !== null);
 
-        function getStats() {
-            const data = localStorage.getItem(statsKey);
-            return data ? JSON.parse(data) : {
-                revenue: 1250000,
-                orders: 42,
-                customers: 89,
-                products: 24
-            };
-        }
+    // Fonction principale qui gère le filtrage
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase().trim();
+        const rows = tableBody.querySelectorAll('tr');
 
-        function getOrders() {
-            const data = localStorage.getItem(ordersKey);
-            return data ? JSON.parse(data) : [
-                { id: 'CMD001', client: 'Jean Dupont', montant: 85000, statut: 'Livrée', date: '03/11/2025' },
-                { id: 'CMD002', client: 'Marie Sarr', montant: 45000, statut: 'En cours', date: '02/11/2025' },
-                { id: 'CMD003', client: 'Paul Ndiaye', montant: 120000, statut: 'En attente', date: '01/11/2025' }
-            ];
-        }
+        rows.forEach(row => {
+            let matchesSearch = false;
+            let matchesFilters = true;
 
-        function getProducts() {
-            const data = localStorage.getItem(productsKey);
-            return data ? JSON.parse(data) : [
-                { id: '1', name: 'Chaussures Running Pro', stock: 15, price: 45000 },
-                { id: '2', name: 'Ballon Football', stock: 3, price: 25000 },
-                { id: '3', name: 'Tapis de Yoga', stock: 0, price: 20000 },
-                { id: '4', name: 'Raquette Tennis', stock: 8, price: 35000 },
-                { id: '5', name: 'Vélo de Course', stock: 0, price: 150000 },
-                { id: '6', name: 'Haltères 10kg', stock: 2, price: 18000 }
-            ];
-        }
+            // 1. Recherche Textuelle (dans toutes les cellules de la ligne)
+            const cells = row.querySelectorAll('td');
+            cells.forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(searchText)) {
+                    matchesSearch = true;
+                }
+            });
 
-        function getLowStock() {
-            const products = getProducts();
-            return products.filter(p => p.stock < 5); // Stock faible si moins de 5 unités
-        }
+            // 2. Filtres Dropdown
+            filters.forEach(filter => {
+                const filterValue = filter.value.toLowerCase();
+                // Utilise l'attribut data-column-index pour cibler la bonne colonne de la ligne
+                const columnIndex = filter.getAttribute('data-column-index');
 
-        function loadDashboard() {
-            const stats = getStats();
-            document.getElementById('totalRevenue').textContent = stats.revenue.toLocaleString() + ' CFA';
-            document.getElementById('totalOrders').textContent = stats.orders;
-            document.getElementById('totalCustomers').textContent = stats.customers;
-            document.getElementById('totalProducts').textContent = stats.products;
+                if (columnIndex && filterValue !== 'all') {
+                    const cellToFilter = row.cells[parseInt(columnIndex)];
+                    // Vérifie si la cellule contient la valeur du filtre
+                    if (cellToFilter && !cellToFilter.textContent.toLowerCase().includes(filterValue)) {
+                        matchesFilters = false;
+                    }
+                }
+            });
 
-            const orders = getOrders();
-            document.getElementById('recentOrders').innerHTML = orders.map(o => `
-                <tr>
-                    <td><strong>${o.id}</strong></td>
-                    <td>${o.client}</td>
-                    <td>${o.montant.toLocaleString()} CFA</td>
-                    <td><span style="padding:0.25rem 0.75rem; border-radius:999px; font-size:0.75rem; background:#dbeafe; color:#1e40af;">${o.statut}</span></td>
-                    <td>${o.date}</td>
-                </tr>
-            `).join('');
-
-            const lowStock = getLowStock();
-            if (lowStock.length > 0) {
-                document.getElementById('stockAlerts').innerHTML = lowStock.map(p => {
-                    const isOutOfStock = p.stock === 0;
-                    const statusClass = isOutOfStock ? 'stock-out' : 'stock-low';
-                    const statusText = isOutOfStock ? 'Rupture' : 'Stock faible';
-                    const statusBadgeClass = isOutOfStock ? 'status-out' : 'status-low';
-                    
-                    return `
-                        <div class="stock-alert-item ${statusClass}">
-                            <div>
-                                <strong>${p.name}</strong> – Stock: ${p.stock} unités
-                            </div>
-                            <span class="stock-status ${statusBadgeClass}">${statusText}</span>
-                        </div>
-                    `;
-                }).join('');
+            // Afficher ou masquer la ligne
+            if (matchesSearch && matchesFilters) {
+                row.style.display = '';
             } else {
-                document.getElementById('stockAlerts').innerHTML = '<p style="color:#6b7280;">Aucune alerte stock pour le moment</p>';
+                row.style.display = 'none';
             }
-        }
+        });
+    }
 
-        function checkAuth() {
-            if (!document.cookie.includes('admin_session')) {
-                // window.location.href = 'admin-login.html';
-            }
-        }
+    // Événements: déclencher le filtre sur chaque saisie ou changement de sélection
+    searchInput.addEventListener('input', filterTable);
+    filters.forEach(filter => {
+        filter.addEventListener('change', filterTable);
+    });
 
-        function logout() {
-            if (confirm('Déconnexion ?')) {
-                document.cookie = 'admin_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                alert('Déconnecté !');
-            }
-        }
+    // Appliquer le filtre initial au chargement (dans le cas où il y a des valeurs par défaut)
+    filterTable(); 
+}
 
-        setInterval(loadDashboard, 30000);
+// Initialisation des filtres/recherches pour chaque page au chargement du DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Page Produits (gestion-produits.blade.php)
+    applyTableFilter('produits-table', 'searchInput', ['categorieFilter']);
+
+    // Page Commandes (admin-commandes.blade.php)
+    applyTableFilter('commandes-table', 'searchInput', ['statusFilter']);
+
+    // Page Clients (admin-clients.blade.php)
+    applyTableFilter('clients-table', 'searchInput'); // Pas de filtres de sélection par défaut
+});
